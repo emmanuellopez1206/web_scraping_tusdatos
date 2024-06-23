@@ -23,17 +23,20 @@ class ScrapperCreation(ABC):
         }
         self.process_execute = ""
 
+
 class ScrapperActor(ScrapperCreation):
     def __init__(self, cedula: str):
         super().__init__(cedula=cedula)
         self.scrapping_payload_body["actor"]["cedulaActor"] = self.cedula
         self.process_execute = "Actor"
 
+
 class ScrapperDemandado(ScrapperCreation):
     def __init__(self, cedula: str):
         super().__init__(cedula=cedula)
         self.scrapping_payload_body["demandado"]["cedulaDemandado"] = self.cedula
         self.process_execute = "Demandado"
+
 
 class ScrapperFactory:
     """
@@ -99,7 +102,7 @@ class ScrapperJudiciales:
         return {
             "causas": all_causas,
             "total": len(all_causas),
-            "proceso_user":"proceso ejecutado con exito",
+            "proceso_user": "proceso ejecutado con exito",
             "proceso_ejecutado": user_scrapper.scrapping_payload_body,
         }
 
@@ -120,7 +123,6 @@ class ScrapperJudiciales:
             )
             judicial["informacion_juicio"] = informacion_juicio
             break
-
 
     @staticmethod
     def get_incidente_judicatura(judiciales: dict):
@@ -148,14 +150,24 @@ class ScrapperJudiciales:
                 params={},
                 payload={
                     "aplicativo": "web",
-                    "idIncidenteJudicatura": incidente_judicatura_completo["lstIncidenteJudicatura"][0]["idIncidenteJudicatura"],
+                    "idIncidenteJudicatura": incidente_judicatura_completo[
+                        "lstIncidenteJudicatura"
+                    ][0]["idIncidenteJudicatura"],
                     "idJudicatura": incidente_judicatura_completo["idJudicatura"],
                     "idJuicio": incidente_judicatura_completo["idJuicio"],
-                    "idMovimientoJuicioIncidente": incidente_judicatura_completo["lstIncidenteJudicatura"][0]["idMovimientoJuicioIncidente"],
-                    "incidente": incidente_judicatura_completo["lstIncidenteJudicatura"][0]["incidente"],
-                    "nombreJudicatura": incidente_judicatura_completo["nombreJudicatura"]
-                }
+                    "idMovimientoJuicioIncidente": incidente_judicatura_completo[
+                        "lstIncidenteJudicatura"
+                    ][0]["idMovimientoJuicioIncidente"],
+                    "incidente": incidente_judicatura_completo[
+                        "lstIncidenteJudicatura"
+                    ][0]["incidente"],
+                    "nombreJudicatura": incidente_judicatura_completo[
+                        "nombreJudicatura"
+                    ],
+                },
             )
-            judicial["incidente_judicatura_completo"]["actuacion_judicial"] = actuacion_judicial
+            judicial["incidente_judicatura_completo"]["actuacion_judicial"] = (
+                actuacion_judicial
+            )
 
             break

@@ -35,7 +35,10 @@ def initialize_data():
     finally:
         session.close()
 
+
 initialize_data()
-@app.get("/", tags=["home"])
-def message() -> HTMLResponse:
+
+
+@app.get("/")
+def api_health() -> str:
     return "API Judiciales"

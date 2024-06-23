@@ -29,4 +29,3 @@ def scrapper_judiciales(body: ScrappingModel):
     incidente_judicatura = ScrapperJudiciales.get_incidente_judicatura(judiciales)
 
     return {"judiciales": judiciales}
-
