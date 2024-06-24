@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from config.database import Base
 
@@ -65,12 +65,12 @@ class ActuacionJudicial(Base):
     idMovimientoJuicioIncidente = Column(Integer)
     ieTablaReferencia = Column(String)
     ieDocumentoAdjunto = Column(String)
-    escapeOut = Column(Boolean)
+    escapeOut = Column(String)
     uuid = Column(String)
     alias = Column(String)
     nombreArchivo = Column(String)
     tipoIngreso = Column(String)
-    ieTablaReferencia = Column(String)
+    idTablaReferencia = Column(String)
 
 
 class ListaIncidenteJudicatura(Base):

@@ -1,13 +1,7 @@
-from typing import List
-
-from fastapi import APIRouter, Depends, Path, Query
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
-
-from config.database import Session
+from fastapi import APIRouter, BackgroundTasks
 from controllers.scrapper import ScrapperFactory, ScrapperJudiciales
-from middlewares.jwt_bearer import JWTBearer
 from schemas.scrapper import ScrappingModel
+from services.scrapper import SaveDataJudicial
 
 scrapper_router = APIRouter()
 
@@ -15,7 +9,7 @@ scrapper_router = APIRouter()
 @scrapper_router.post(
     "/scrapper",
 )
-def scrapper_judiciales(body: ScrappingModel):
+def scrapper_judiciales(body: ScrappingModel, background_tasks: BackgroundTasks):
     """
     Scrapping de datos judiciales
     """
@@ -25,7 +19,6 @@ def scrapper_judiciales(body: ScrappingModel):
         scrapper = ScrapperFactory.create_scrapper("demandado", body.demandado_id)
     judiciales = ScrapperJudiciales.get_causas(scrapper)
 
-    informacion_juicio = ScrapperJudiciales.get_informacion_juicio(judiciales)
-    incidente_judicatura = ScrapperJudiciales.get_incidente_judicatura(judiciales)
+    background_tasks.add_task(SaveDataJudicial.save, judiciales)
 
     return {"judiciales": judiciales}

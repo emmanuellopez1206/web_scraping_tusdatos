@@ -1,5 +1,7 @@
 from abc import ABC
+
 import requests
+from utils.utils import write_log
 
 
 class ScrapperCreation(ABC):
@@ -99,12 +101,7 @@ class ScrapperJudiciales:
                 break
             params["page"] += 1
             all_causas.extend(causas)
-        return {
-            "causas": all_causas,
-            "total": len(all_causas),
-            "proceso_user": "proceso ejecutado con exito",
-            "proceso_ejecutado": user_scrapper.scrapping_payload_body,
-        }
+        return {"causas": all_causas, "process": user_scrapper.process_execute}
 
     @staticmethod
     def get_informacion_juicio(judiciales: dict):
@@ -122,7 +119,7 @@ class ScrapperJudiciales:
                 payload={},
             )
             judicial["informacion_juicio"] = informacion_juicio
-            break
+            write_log(f"Scrapper causa {id_juicio}")
 
     @staticmethod
     def get_incidente_judicatura(judiciales: dict):
@@ -169,5 +166,4 @@ class ScrapperJudiciales:
             judicial["incidente_judicatura_completo"]["actuacion_judicial"] = (
                 actuacion_judicial
             )
-
-            break
+            write_log(f"Incidente judicatura {id_juicio}")

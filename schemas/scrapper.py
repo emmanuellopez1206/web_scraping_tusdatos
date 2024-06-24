@@ -1,5 +1,4 @@
-from typing import List, Union
-from pydantic import BaseModel, ConfigDict, EmailStr, model_validator
+from pydantic import BaseModel, model_validator
 from pydantic import BaseModel
 
 
@@ -10,7 +9,7 @@ class ScrappingModel(BaseModel):
     @model_validator(mode="after")
     def validate_model_scrapping(self) -> "ScrappingModel":
         """
-        Validate the service_type field.
+        Valida el campo service_type, si no se encuentra en la lista de opciones
         """
         if self.actor_id is None and self.demandado_id is None:
             raise ValueError(
