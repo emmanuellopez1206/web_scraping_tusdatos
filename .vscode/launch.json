@@ -22,6 +22,30 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"
             }
+        },
+        {
+            "name": "Pytest units",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${workspaceFolder}/tests/test_units.py",
+                "-vv",
+                "-s"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Pytest Api",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${workspaceFolder}/tests/test_scrapper.py",
+                "-vv",
+                "-s"
+            ],
+            "justMyCode": false
         }
     ]
 }
