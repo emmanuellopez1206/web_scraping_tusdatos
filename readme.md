@@ -17,11 +17,11 @@ virtualenv venv
 ```
 4. Activar entorno virtual en powershell:
 ```bash
-.\venv\Scripts\activate.ps1 
+.\venv\Scripts\activate.ps1
 ```
 5. Instalar requerimientos:
 ```bash
-pip install -r requeriments.txt
+pip install -r .\requirements.txt
 ```
 6. Al completar los pasos anteriores puedes proceder a ejecutar el proyecto con el siguiente comando y acceder a usar la API en http://localhost:8001/docs:
 ```bash
